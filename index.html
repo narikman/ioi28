@@ -94,42 +94,6 @@
             text-decoration: underline;
         }
 
-        /* Новые стили для улучшения дизайна */
-        body {
-            background: linear-gradient(to bottom right, #f2f4f6, #e6e9ec);
-        }
-
-        #header {
-            background-color: #222831;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .table-form .submit {
-            background: linear-gradient(90deg, #1e88e5, #2196f3);
-            transition: 0.3s ease;
-        }
-
-        .table-form .submit:hover {
-            background: linear-gradient(90deg, #1565c0, #1e88e5);
-            transform: scale(1.05);
-        }
-
-        .bottom-links a {
-            color: #0288d1;
-            font-weight: bold;
-        }
-
-        .bottom-links a:hover {
-            color: #0277bd;
-            text-decoration: underline;
-        }
-
-        .menu-list li a:hover {
-            background: linear-gradient(90deg, #3b3b3b, #4a4a4a);
-            color: #ffffff;
-            transform: scale(1.05);
-        }
-
         /* Стиль для сообщения об ошибке */
         .error-message {
             position: fixed;
@@ -155,25 +119,22 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            // Проверяем логин и пароль
-            if (username === "gabe_itch" && password === "1337") {
-                window.open("https://www.tiktok.com/@legenda_s0/video/6994505064689847553?q=%D1%81%D1%82%D0%BE%D0%BD%D1%8B&t=1730979838423", "_blank");
-            } else if (username === "mamut_raxal" && password === "228") {
-                window.open("https://www.tiktok.com/@rc3sgm_/video/7412083188530613510?is_from_webapp=1&sender_device=pc", "_blank");
-            } else if (username === "Ельнур" && password === "525252") {
-                window.open("https://www.tiktok.com/@upminaa.cos/video/7433869436706180384", "_blank");
-            } else {
-                // Открываем ошибку на весь экран
-                const errorMessage = document.createElement("div");
-                errorMessage.classList.add("error-message");
-                errorMessage.innerHTML = "НАПИШИ ЛОГИН И ПОРОЛЬ НЕГР или напиши @g3ard в тг";
-                document.body.appendChild(errorMessage);
-            }
-        }
+            // Получаем данные из localStorage
+            const storedUsername = localStorage.getItem("username");
+            const storedPassword = localStorage.getItem("password");
+            const storedRedirectUrl = localStorage.getItem("redirectUrl");
 
-        function closeTabs() {
-            // Попытаться закрыть текущую вкладку
-            window.close();
+            // Проверка логина и пароля
+            if (storedUsername === username && storedPassword === password) {
+                alert("Вход успешен!");
+                if (storedRedirectUrl) {
+                    window.open(storedRedirectUrl, "_blank"); // Открытие ссылки в новой вкладке
+                } else {
+                    window.open("welcome.html", "_blank"); // В случае, если ссылка не была указана
+                }
+            } else {
+                alert("Неверный логин или пароль!");
+            }
         }
     </script>
 </head>
@@ -191,24 +152,21 @@
             <li><a href="https://codeforces.com/enter?back=%2F%3Flocale%3Dru" target="_blank">КАчалка</a></li>
             <li><a href="https://acmp.ru/index.asp?main=task&id_task=561" target="_blank">АДСКОЕ</a></li>
             <li><a href="https://images.app.goo.gl/sTB69RSdjS1CJKEM7" target="_blank">ГРУППА</a></li>
-            <li><a href="https://images.app.goo.gl/ss19PPCbaPqKfLmh8" target="_blank">САМЫЙ ПОПУЛЯРНЫЙ АКТЕР(смотреть впритыг)</a></li>
-            <li><a href="https://login1.edupage.org/" target="_blank">EDU</a></li>
-            <li><a href="https://web.telegram.org/k/#-2404867680" target="_blank">ПОМОЩЬ</a></li>
+            <li><a href="https://images.app.goo.gl/ss19PPCbaPqKfLmh8" target="_blank">ПОПУЛЯРНЫЙ</a></li>
         </ul>
     </div>
 
     <div class="enterPage">
         <h5>Заполните форму, чтобы смотреть содержимое.</h5>
         <p>Вы можете использовать ваш аккаунт <a href="#"><a href="https://www.youtube.com/watch?v=QD6H0W0HQG4" target="_blank">PORNHUB</a></a> или <a href="#"><a href="https://www.youtube.com/watch?v=CZmAZa2e1D4" target="_blank">rule34.xxx</a></a> для просмотра.</p>
-
         <form method="post" action="" onsubmit="checkCredentials(event)">
             <table class="table-form">
                 <tr>
-                    <td><label for="username">Впишите НИК любимой актрисы</label></td>
+                    <td><label for="username">Впишите ник</label></td>
                     <td><input type="text" id="username" name="username"></td>
                 </tr>
                 <tr>
-                    <td><label for="password">Какую часть вы хотите посмотреть</label></td>
+                    <td><label for="password">Впишите пороль</label></td>
                     <td><input type="password" id="password" name="password"></td>
                 </tr>
                 <tr>
@@ -220,7 +178,7 @@
         </form>
         
         <div class="bottom-links">
-            <a href="#" onclick="closeTabs()">ВЫ гей?</a>
+            <a href="register.html">Зарегистрироваться</a>
         </div>
     </div>
 </body>
